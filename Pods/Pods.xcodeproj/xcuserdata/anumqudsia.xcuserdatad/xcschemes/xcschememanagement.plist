@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyBeaver.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyXMLParser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2E69E29F79BEF83F06A2EF328DED824A</key>
+		<key>1C1CD6310037B0056F53A61310A66196</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3DBCBE9A118C6A128415A1AD0181989</key>
+		<key>9AAF3461F807F6BB0C7B4B80ACB3465B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AFA319AF6E648D8A93FE566B3440CCFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

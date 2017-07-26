@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import SwiftyBeaver
+let LOG = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        #if DEBUG
+            let console = ConsoleDestination()
+            console.minLevel = .info
+            LOG.addDestination(console)
+        #endif
+        
         return true
     }
 

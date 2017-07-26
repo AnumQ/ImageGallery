@@ -13,8 +13,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ApiManager.sharedInstance.fetchImages { (json, error) in
-            print(json)
+        ApiManager.sharedInstance.fetchImages { xml, err in
+            
+            guard let xmlData = xml else { return LOG.error(err as Any) }
+            
+            
         }
     }
 

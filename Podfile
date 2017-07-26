@@ -6,4 +6,5 @@ use_frameworks!
 
 target 'ImageGallery' do
    pod 'SwiftyXMLParser'
+   pod 'SwiftyBeaver'
 end

@@ -1,12 +1,15 @@
 PODS:
+  - SwiftyBeaver (1.1.4)
   - SwiftyXMLParser (3.0.0)
 
 DEPENDENCIES:
+  - SwiftyBeaver
   - SwiftyXMLParser
 
 SPEC CHECKSUMS:
+  SwiftyBeaver: 9216b6e163c145628ccc7c0126df4287880d6e1e
   SwiftyXMLParser: 8d2295fb4fbc6e2ff241e7c8d7717e159be35969
 
-PODFILE CHECKSUM: 5d183d6ffe1bce5953d098abb7ae17bdfc51c16e
+PODFILE CHECKSUM: 65f112e478d34fe3f69c62cb327f3524ef169273
 
 COCOAPODS: 1.2.0
