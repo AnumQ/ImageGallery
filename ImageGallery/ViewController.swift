@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import SwiftyXMLParser
 
 class ViewController: UIViewController {
 
+    var flickrImages: [FlickrImage]!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,6 +19,19 @@ class ViewController: UIViewController {
             
             guard let xmlData = xml else { return LOG.error(err as Any) }
             
+            guard let entries = xmlData[Constants.feed][Constants.entry] as XML.Accessor? else {
+                return LOG.error("Unable to parse \(Constants.entry)")
+            }
+            
+            self.flickrImages = []
+            
+            for entry in entries {
+
+                guard let flickrImage = Parser.parseEntryToFlickrImage(entry: entry) else {
+                    return
+                }
+                self.flickrImages.append(flickrImage)
+            }
             
         }
     }
