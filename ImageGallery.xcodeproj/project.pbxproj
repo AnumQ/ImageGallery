@@ -16,8 +16,6 @@
 		8693B86D1F28A48B0054D958 /* ImageGalleryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B86C1F28A48B0054D958 /* ImageGalleryTests.swift */; };
 		8693B8781F28A48B0054D958 /* ImageGalleryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8771F28A48B0054D958 /* ImageGalleryUITests.swift */; };
 		8693B8861F28A5740054D958 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8851F28A5740054D958 /* ApiManager.swift */; };
-		8693B8871F28A5740054D958 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8851F28A5740054D958 /* ApiManager.swift */; };
-		8693B8881F28A5740054D958 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8851F28A5740054D958 /* ApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,7 +350,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8693B8871F28A5740054D958 /* ApiManager.swift in Sources */,
 				8693B86D1F28A48B0054D958 /* ImageGalleryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +358,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8693B8881F28A5740054D958 /* ApiManager.swift in Sources */,
 				8693B8781F28A48B0054D958 /* ImageGalleryUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,6 +593,7 @@
 				8693B87E1F28A48B0054D958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8693B87F1F28A48B0054D958 /* Build configuration list for PBXNativeTarget "ImageGalleryTests" */ = {
 			isa = XCConfigurationList;
@@ -605,6 +602,7 @@
 				8693B8811F28A48B0054D958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8693B8821F28A48B0054D958 /* Build configuration list for PBXNativeTarget "ImageGalleryUITests" */ = {
 			isa = XCConfigurationList;
@@ -613,6 +611,7 @@
 				8693B8841F28A48B0054D958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -12,7 +12,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        ApiManager.sharedInstance.fetchImages { (json, error) in
+            print(json)
+        }
     }
 
     override func didReceiveMemoryWarning() {
