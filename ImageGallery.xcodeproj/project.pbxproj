@@ -14,6 +14,9 @@
 		8693B8621F28A48B0054D958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8693B8601F28A48B0054D958 /* LaunchScreen.storyboard */; };
 		8693B86D1F28A48B0054D958 /* ImageGalleryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B86C1F28A48B0054D958 /* ImageGalleryTests.swift */; };
 		8693B8781F28A48B0054D958 /* ImageGalleryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8771F28A48B0054D958 /* ImageGalleryUITests.swift */; };
+		8693B8861F28A5740054D958 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8851F28A5740054D958 /* ApiManager.swift */; };
+		8693B8871F28A5740054D958 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8851F28A5740054D958 /* ApiManager.swift */; };
+		8693B8881F28A5740054D958 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8851F28A5740054D958 /* ApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,7 @@
 		8693B8731F28A48B0054D958 /* ImageGalleryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageGalleryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8693B8771F28A48B0054D958 /* ImageGalleryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryUITests.swift; sourceTree = "<group>"; };
 		8693B8791F28A48B0054D958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8693B8851F28A5740054D958 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 			children = (
 				8693B8571F28A48B0054D958 /* AppDelegate.swift */,
 				8693B8591F28A48B0054D958 /* ViewController.swift */,
+				8693B8851F28A5740054D958 /* ApiManager.swift */,
 				8693B85B1F28A48B0054D958 /* Main.storyboard */,
 				8693B85E1F28A48B0054D958 /* Assets.xcassets */,
 				8693B8601F28A48B0054D958 /* LaunchScreen.storyboard */,
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8693B85A1F28A48B0054D958 /* ViewController.swift in Sources */,
+				8693B8861F28A5740054D958 /* ApiManager.swift in Sources */,
 				8693B8581F28A48B0054D958 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8693B8871F28A5740054D958 /* ApiManager.swift in Sources */,
 				8693B86D1F28A48B0054D958 /* ImageGalleryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8693B8881F28A5740054D958 /* ApiManager.swift in Sources */,
 				8693B8781F28A48B0054D958 /* ImageGalleryUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
