@@ -97,6 +97,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		864F756A1F2AE4BB001A28C9 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				8674CA821F28CA33007F9A9A /* Parser.swift */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		864F756B1F2AE4C3001A28C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8674CA841F28CA76007F9A9A /* FlickrImage.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		864F756C1F2AE4F5001A28C9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				864F75681F2ADCD9001A28C9 /* FlickrCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		864F756D1F2AE500001A28C9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8693B8591F28A48B0054D958 /* ImageGalleryController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		864F756E1F2AE53A001A28C9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8693B8851F28A5740054D958 /* ApiManager.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		8693B84B1F28A48B0054D958 = {
 			isa = PBXGroup;
 			children = (
@@ -123,14 +163,14 @@
 			isa = PBXGroup;
 			children = (
 				8693B8571F28A48B0054D958 /* AppDelegate.swift */,
-				8674CA821F28CA33007F9A9A /* Parser.swift */,
-				8674CA841F28CA76007F9A9A /* FlickrImage.swift */,
-				8693B8591F28A48B0054D958 /* ImageGalleryController.swift */,
+				864F756A1F2AE4BB001A28C9 /* Parser */,
+				864F756B1F2AE4C3001A28C9 /* Model */,
+				864F756C1F2AE4F5001A28C9 /* View */,
+				864F756D1F2AE500001A28C9 /* Controller */,
 				8674CA801F28BC72007F9A9A /* Constants.swift */,
-				8693B8851F28A5740054D958 /* ApiManager.swift */,
-				8693B85B1F28A48B0054D958 /* Main.storyboard */,
-				864F75681F2ADCD9001A28C9 /* FlickrCell.swift */,
+				864F756E1F2AE53A001A28C9 /* API */,
 				8693B85E1F28A48B0054D958 /* Assets.xcassets */,
+				8693B85B1F28A48B0054D958 /* Main.storyboard */,
 				8693B8601F28A48B0054D958 /* LaunchScreen.storyboard */,
 				8693B8631F28A48B0054D958 /* Info.plist */,
 			);
