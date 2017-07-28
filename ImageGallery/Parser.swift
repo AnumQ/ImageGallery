@@ -29,6 +29,16 @@ class Parser {
             return nil
         }
         
-        return FlickrImage(title: title, imageUrl: imageUrl)
+        let flickrImage = FlickrImage(title: title, imageUrl: imageUrl)
+        
+        guard let url = URL(string: imageUrl) else {
+            LOG.error("Unable to create URL from \(imageUrl)")
+            return nil
+        }
+        
+        flickrImage.getImage(url: url)
+        
+        return flickrImage
     }
+    
 }
