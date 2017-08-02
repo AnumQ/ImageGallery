@@ -16,4 +16,7 @@ struct Constants {
     static let href = "href"
     static let rel = "rel"
     static let enclosure = "enclosure"
+    static let category = "category"
+    static let scheme = "scheme"
+    static let tagsUrl = "https://www.flickr.com/photos/tags/"
 }
