@@ -1,8 +1,9 @@
 # ImageGallery
 
-### Run 'pod install'
+## Instructions
+Run 'pod install'
 
-### Open ImageGallery.xcworkspace file
+Open ImageGallery.xcworkspace file
 
 
 ## Description
