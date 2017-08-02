@@ -31,34 +31,28 @@ class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
     
     func getImagesFromFlickr() {
         ApiManager.sharedInstance.fetchImages { xml, err in
-            
             guard let xmlData = xml else { return LOG.error(err as Any) }
-            
             guard let entries = xmlData[Constants.feed][Constants.entry] as XML.Accessor? else {
                 return LOG.error(Failed.toParse + Constants.entry)
             }
             
             self.flickrImages = []
-            
             for entry in entries {
-                
                 guard let flickrImage = Parser.parseEntryToFlickrImage(entry: entry) else {
                     return
                 }
                 self.flickrImages.append(flickrImage)
-                
             }
             
             self.stopSpinner()
-            self.collectionView?.reloadData()
-            
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
             self.allImages = self.flickrImages
-            
             
             for flickrImage in self.flickrImages {
                 Storage.addImage(flickrImage: flickrImage)
             }
-            
         }
     }
     
@@ -77,7 +71,9 @@ class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
             self.allImages = imagesFromStorage
             self.flickrImages = imagesFromStorage
             self.stopSpinner()
-            self.collectionView?.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
         }
     }
     
@@ -132,8 +128,8 @@ extension ImageGalleryController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
                                                       for: indexPath) as! FlickrCell
         cell.backgroundColor = UIColor.white
-        cell.imageView.image = self.flickrImages[indexPath.row].image
-        let tags = self.flickrImages[indexPath.row].tags
+        cell.imageView.image = self.allImages[indexPath.row].image
+        let tags = self.allImages[indexPath.row].tags
         let tagsString = tags.reduce("", { $0 + $1 + ","})
         
         if tags.count > 0 {
