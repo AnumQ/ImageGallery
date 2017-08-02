@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyXMLParser
+import CoreData
 
 class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
 
@@ -16,33 +17,65 @@ class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
     
     @IBOutlet weak var searchField: UITextField!
-    fileprivate var flickrImages: [FlickrImage]!
-    fileprivate var allImages: [FlickrImage]!
+    fileprivate var flickrImages: [FlickrImageModel]!
+    fileprivate var allImages: [FlickrImageModel]!
     fileprivate let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getImagesFromStorage()
+        
+        getImagesFromFlickr()
+    }
     
-        startSpinner()
+    func getImagesFromFlickr() {
         ApiManager.sharedInstance.fetchImages { xml, err in
             
             guard let xmlData = xml else { return LOG.error(err as Any) }
             
             guard let entries = xmlData[Constants.feed][Constants.entry] as XML.Accessor? else {
-                return LOG.error("Unable to parse \(Constants.entry)")
+                return LOG.error(Failed.toParse + Constants.entry)
             }
             
             self.flickrImages = []
             
             for entry in entries {
-
+                
                 guard let flickrImage = Parser.parseEntryToFlickrImage(entry: entry) else {
                     return
                 }
                 self.flickrImages.append(flickrImage)
                 
             }
+            
+            self.stopSpinner()
+            self.collectionView?.reloadData()
+            
             self.allImages = self.flickrImages
+            
+            
+            for flickrImage in self.flickrImages {
+                Storage.addImage(flickrImage: flickrImage)
+            }
+            
+        }
+    }
+    
+    func getImagesFromStorage() {
+        startSpinner()
+        
+        let images:[FlickrImage]? = Storage.getImages()
+        if images != nil {
+            var imagesFromStorage: [FlickrImageModel] = []
+            for image:FlickrImage in images! {
+                let flickrImageModel = Parser.parseFlickrImageToModel(image: image)
+                if flickrImageModel != nil {
+                    imagesFromStorage.append(flickrImageModel!)
+                }
+            }
+            self.allImages = imagesFromStorage
+            self.flickrImages = imagesFromStorage
             self.stopSpinner()
             self.collectionView?.reloadData()
         }

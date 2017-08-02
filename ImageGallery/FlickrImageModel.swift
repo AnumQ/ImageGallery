@@ -1,5 +1,5 @@
 //
-//  FlickrImage.swift
+//  FlickrImageModel.swift
 //  ImageGallery
 //
 //  Created by Anum Qudsia on 26/07/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FlickrImage {
+class FlickrImageModel {
     
     var title: String
     var imageUrl: String
