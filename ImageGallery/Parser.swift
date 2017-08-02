@@ -30,7 +30,7 @@ class Parser {
         }
         
         let tags = entry[Constants.category].filter { $0.attributes[Constants.scheme] == Constants.tagsUrl }
-        let tagsList = tags.map { $0.attributes["term"] }
+        let tagsList = tags.map { $0.attributes["term"]}.filter({ $0 != "" }) as! [String]
         
         let flickrImage = FlickrImage(title: title, imageUrl: imageUrl, tags: tagsList)
         

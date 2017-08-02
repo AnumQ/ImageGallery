@@ -9,19 +9,20 @@
 import UIKit
 import SwiftyXMLParser
 
-class ImageGalleryController: UICollectionViewController {
+class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
 
-    
     fileprivate let reuseIdentifier = "reusableCell"
     fileprivate let itemsPerRow: CGFloat = 3
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
     
-    var flickrImages: [FlickrImage]!
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    @IBOutlet weak var searchField: UITextField!
+    fileprivate var flickrImages: [FlickrImage]!
+    fileprivate var allImages: [FlickrImage]!
+    fileprivate let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         startSpinner()
         ApiManager.sharedInstance.fetchImages { xml, err in
             
@@ -39,9 +40,28 @@ class ImageGalleryController: UICollectionViewController {
                     return
                 }
                 self.flickrImages.append(flickrImage)
+                
             }
-            
+            self.allImages = self.flickrImages
             self.stopSpinner()
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+        
+        if sender.text != nil && !sender.text!.isEmpty {
+            let search = sender.text!
+            
+            let filtered = self.allImages.filter({ $0.tags.contains(where: {
+                $0.range(of: search, options: .caseInsensitive) != nil
+                })
+            })
+            
+            self.flickrImages = filtered
+            self.collectionView?.reloadData()
+        } else {
+            self.flickrImages = allImages
             self.collectionView?.reloadData()
         }
     }
@@ -78,9 +98,15 @@ extension ImageGalleryController {
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
                                                       for: indexPath) as! FlickrCell
-        cell.backgroundColor = UIColor.black
-        cell.imageView.contentMode = .scaleAspectFit
+        cell.backgroundColor = UIColor.white
         cell.imageView.image = self.flickrImages[indexPath.row].image
+        let tags = self.flickrImages[indexPath.row].tags
+        let tagsString = tags.reduce("", { $0 + $1 + ","})
+        
+        if tags.count > 0 {
+            let removeTheLastCharacterInTagsString = tagsString.substring(to: tagsString.index(before: tagsString.endIndex))
+            cell.tagsLabel.text = removeTheLastCharacterInTagsString
+        }
         
         return cell
     }

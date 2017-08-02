@@ -14,9 +14,9 @@ class FlickrImage {
     var title: String
     var imageUrl: String
     var image: UIImage!
-    var tags: [String?]
+    var tags: [String]
     
-    init(title: String, imageUrl: String, tags:[String?]) {
+    init(title: String, imageUrl: String, tags:[String]) {
         self.title = title
         self.imageUrl = imageUrl
         self.tags = tags

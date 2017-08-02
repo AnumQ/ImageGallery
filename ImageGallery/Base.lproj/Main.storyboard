@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,18 +33,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BCw-DW-UgY">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <rect key="frame" x="12" y="0.0" width="177" height="170"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbi-gD-iAg">
+                                            <rect key="frame" x="12" y="173" width="177" height="19"/>
+                                            <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="19" id="Sq1-ci-hgN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="leading" secondItem="4V1-Om-waS" secondAttribute="leading" id="8yZ-Cl-u1k"/>
-                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="top" secondItem="4V1-Om-waS" secondAttribute="top" id="Z97-32-V5u"/>
-                                    <constraint firstAttribute="bottom" secondItem="BCw-DW-UgY" secondAttribute="bottom" id="ab5-bw-VZs"/>
-                                    <constraint firstAttribute="trailing" secondItem="BCw-DW-UgY" secondAttribute="trailing" id="kDV-7k-9L5"/>
+                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="centerX" secondItem="4V1-Om-waS" secondAttribute="centerX" id="Wln-ZP-xFM"/>
+                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="leading" secondItem="4V1-Om-waS" secondAttribute="leadingMargin" constant="4" id="Zzf-Uw-VlU"/>
+                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="leading" secondItem="Lbi-gD-iAg" secondAttribute="leading" id="b6A-eV-oEA"/>
+                                    <constraint firstItem="Lbi-gD-iAg" firstAttribute="top" secondItem="BCw-DW-UgY" secondAttribute="bottom" constant="3" id="bAA-MZ-4dp"/>
+                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="trailing" secondItem="Lbi-gD-iAg" secondAttribute="trailing" id="oEd-S9-V17"/>
+                                    <constraint firstItem="Lbi-gD-iAg" firstAttribute="bottom" secondItem="4V1-Om-waS" secondAttribute="bottomMargin" id="s7Z-BS-tMB"/>
+                                    <constraint firstItem="BCw-DW-UgY" firstAttribute="top" secondItem="4V1-Om-waS" secondAttribute="top" id="shB-Cr-0xC"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="BCw-DW-UgY" id="yeF-yH-CRy"/>
+                                    <outlet property="tagsLabel" destination="Lbi-gD-iAg" id="0bx-Ek-HPm"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -52,7 +67,23 @@
                             <outlet property="delegate" destination="pKa-sS-RWn" id="Wjc-7I-1aP"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="cQT-6i-e5b"/>
+                    <navigationItem key="navigationItem" id="cQT-6i-e5b">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" id="lQf-3n-JIO">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldEditingChanged:" destination="pKa-sS-RWn" eventType="editingChanged" id="O7O-J6-gaP"/>
+                                <outlet property="delegate" destination="pKa-sS-RWn" id="qqL-En-Zc1"/>
+                            </connections>
+                        </textField>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchField" destination="lQf-3n-JIO" id="ddm-Ou-Y5o"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VyJ-KT-eKw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
