@@ -12,6 +12,7 @@
 		864F75711F318D95001A28C9 /* ImageGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 864F756F1F318D95001A28C9 /* ImageGallery.xcdatamodeld */; };
 		864F757C1F31977C001A28C9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864F757B1F31977C001A28C9 /* Storage.swift */; };
 		864F757E1F31A3C8001A28C9 /* FlickrImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864F757D1F31A3C8001A28C9 /* FlickrImageModel.swift */; };
+		864F75801F31AF60001A28C9 /* StorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864F757F1F31AF60001A28C9 /* StorageTest.swift */; };
 		8674CA7F1F28BB11007F9A9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693B8571F28A48B0054D958 /* AppDelegate.swift */; };
 		8674CA811F28BC72007F9A9A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8674CA801F28BC72007F9A9A /* Constants.swift */; };
 		8674CA831F28CA33007F9A9A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8674CA821F28CA33007F9A9A /* Parser.swift */; };
@@ -48,6 +49,7 @@
 		864F75701F318D95001A28C9 /* ImageGallery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageGallery.xcdatamodel; sourceTree = "<group>"; };
 		864F757B1F31977C001A28C9 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		864F757D1F31A3C8001A28C9 /* FlickrImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrImageModel.swift; sourceTree = "<group>"; };
+		864F757F1F31AF60001A28C9 /* StorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageTest.swift; sourceTree = "<group>"; };
 		8674CA801F28BC72007F9A9A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8674CA821F28CA33007F9A9A /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		8693B8541F28A48B0054D958 /* ImageGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +152,14 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		864F75811F31AF66001A28C9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				864F757F1F31AF60001A28C9 /* StorageTest.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		8693B84B1F28A48B0054D958 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +185,7 @@
 		8693B8561F28A48B0054D958 /* ImageGallery */ = {
 			isa = PBXGroup;
 			children = (
+				864F75811F31AF66001A28C9 /* Tests */,
 				864F75761F318F5B001A28C9 /* CoreData */,
 				8693B8571F28A48B0054D958 /* AppDelegate.swift */,
 				864F756A1F2AE4BB001A28C9 /* Parser */,
@@ -423,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8693B86D1F28A48B0054D958 /* ImageGalleryTests.swift in Sources */,
+				864F75801F31AF60001A28C9 /* StorageTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
