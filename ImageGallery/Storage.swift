@@ -37,7 +37,7 @@ open class Storage {
         
         do {
             try context.save()
-            LOG.info(Success.imageSaved)
+            LOG.info(Success.imageSaved + flickrImage.title)
         } catch {
             LOG.debug(Failed.saveImage)
         }
@@ -45,19 +45,23 @@ open class Storage {
     
     static func getImages() -> [FlickrImage]? {
         
-        let context = getContext()
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.FlickrImage)
-        request.returnsObjectsAsFaults = false
-        
-        let images: [FlickrImage]!
-        do {
-            images = try context.fetch(request) as! [FlickrImage]
-            return images
-            
-        } catch {
-            LOG.debug(Failed.fetchImages)
-        }
+//        let context = getContext()
+//        
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.FlickrImage)
+//        request.returnsObjectsAsFaults = false
+//        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//        
+//        let images: [FlickrImage]!
+//        do {
+//           // images = try context.fetch(request) as! [FlickrImage]
+//            
+//            try controller.performFetch()
+//            //return images
+//            
+//        } catch {
+//            LOG.debug(Failed.fetchImages)
+//        }
+//        return nil
         return nil
     }
     

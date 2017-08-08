@@ -50,12 +50,12 @@ class Parser {
         return flickrImage
     }
     
-    static func parseFlickrImageToModel(image: FlickrImage) -> FlickrImageModel? {
+    static func parseFlickrImageToModel(flickrImage: FlickrImage) -> FlickrImageModel {
         
-        let flickrImage = FlickrImageModel(title: image.title!, imageUrl: image.imageUrl!, tags: image.tags as! [String])
-        flickrImage.image = UIImage(data: image.image as! Data)
+        let flickrImageModel = FlickrImageModel(title: flickrImage.title!, imageUrl: flickrImage.imageUrl!, tags: flickrImage.tags as! [String])
+        flickrImageModel.image = UIImage(data: (flickrImage.image as! Data))
         
-        return flickrImage
+        return flickrImageModel
 
     }
     

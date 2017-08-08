@@ -10,24 +10,64 @@ import UIKit
 import SwiftyXMLParser
 import CoreData
 
-class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
+class ImageGalleryController: UICollectionViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
 
+    var context: NSManagedObjectContext!
     fileprivate let reuseIdentifier = "reusableCell"
     fileprivate let itemsPerRow: CGFloat = 3
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
     
     @IBOutlet weak var searchField: UITextField!
-    fileprivate var flickrImages: [FlickrImageModel]!
-    fileprivate var allImages: [FlickrImageModel]!
+  //  fileprivate var flickrImages: [FlickrImageModel]!
+  //  fileprivate var allImages: [FlickrImageModel]!
     fileprivate let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.context = appDelegate.persistentContainer.viewContext
+        let predicate:NSPredicate! = nil //NSPredicate(format: "title == %@", "Glimt fra båthavna i Skjelanger")
+        self.fetchedResultsController = createFetchController(predicate: predicate)
+        
+        getAllDataFromStorage()
+        //startSpinner()
         
         getImagesFromStorage()
         
         getImagesFromFlickr()
     }
+    
+    func createFetchController(predicate: NSPredicate?) -> NSFetchedResultsController<NSFetchRequestResult> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.FlickrImage)
+        let primarySortDescriptor = NSSortDescriptor(key: "title.order", ascending: true)
+        request.sortDescriptors = [primarySortDescriptor]
+        if predicate != nil {
+            request.predicate = predicate
+        }
+        
+        let frc = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        frc.delegate = self
+        
+        return frc
+    }
+    
+    func getAllDataFromStorage() {
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch {
+            LOG.error("Failed to perform fetch")
+        }
+    }
+    
+    
     
     func getImagesFromFlickr() {
         ApiManager.sharedInstance.fetchImages { xml, err in
@@ -36,45 +76,44 @@ class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
                 return LOG.error(Failed.toParse + Constants.entry)
             }
             
-            self.flickrImages = []
+          //  self.flickrImages = []
             for entry in entries {
                 guard let flickrImage = Parser.parseEntryToFlickrImage(entry: entry) else {
                     return
                 }
-                self.flickrImages.append(flickrImage)
+                Storage.addImage(flickrImage: flickrImage)
+              //  self.flickrImages.append(flickrImage)
             }
             
             self.stopSpinner()
+            
+          //  self.allImages = self.flickrImages
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
-            self.allImages = self.flickrImages
             
-            for flickrImage in self.flickrImages {
-                Storage.addImage(flickrImage: flickrImage)
-            }
+//            for flickrImage in self.flickrImages {
+//                Storage.addImage(flickrImage: flickrImage)
+//            }
         }
     }
     
     func getImagesFromStorage() {
-        startSpinner()
-        
         let images:[FlickrImage]? = Storage.getImages()
         if images != nil {
             var imagesFromStorage: [FlickrImageModel] = []
             for image:FlickrImage in images! {
-                let flickrImageModel = Parser.parseFlickrImageToModel(image: image)
-                if flickrImageModel != nil {
-                    imagesFromStorage.append(flickrImageModel!)
-                }
+                let flickrImageModel = Parser.parseFlickrImageToModel(flickrImage: image)
+                imagesFromStorage.append(flickrImageModel)
             }
-            self.allImages = imagesFromStorage
-            self.flickrImages = imagesFromStorage
+     //       self.allImages = imagesFromStorage
+      //      self.flickrImages = imagesFromStorage
             self.stopSpinner()
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
         }
+        
     }
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
@@ -82,15 +121,25 @@ class ImageGalleryController: UICollectionViewController, UITextFieldDelegate {
         if sender.text != nil && !sender.text!.isEmpty {
             let search = sender.text!
             
-            let filtered = self.allImages.filter({ $0.tags.contains(where: {
-                $0.range(of: search, options: .caseInsensitive) != nil
-                })
-            })
+            let predicate = NSPredicate(format: "title == %@", search)
+            self.fetchedResultsController = createFetchController(predicate: predicate)
             
-            self.flickrImages = filtered
+            getAllDataFromStorage()
+           let data = self.fetchedResultsController.fetchedObjects as? [FlickrImage]
+            
+            print(1)
+//            
+//            let filtered = data.filter({ ($0.tags as! [String]).contains(where: {
+//                $0.range(of: search, options: .caseInsensitive) != nil
+//                })
+//            })
+//            
+//            print(filtered)
+            
+           // self.flickrImages = filtered
             self.collectionView?.reloadData()
         } else {
-            self.flickrImages = allImages
+           // self.flickrImages = allImages
             self.collectionView?.reloadData()
         }
     }
@@ -113,13 +162,23 @@ extension ImageGalleryController {
 extension ImageGalleryController {
     //1
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+        
+        return 0
     }
     
     //2
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return flickrImages != nil ? flickrImages.count : 0
+        //return flickrImages != nil ? flickrImages.count : 0
+        if let sections = fetchedResultsController.sections {
+            let currentSection = sections[section]
+            return currentSection.numberOfObjects
+        }
+        
+        return 0
     }
     
     //3
@@ -128,8 +187,11 @@ extension ImageGalleryController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
                                                       for: indexPath) as! FlickrCell
         cell.backgroundColor = UIColor.white
-        cell.imageView.image = self.allImages[indexPath.row].image
-        let tags = self.allImages[indexPath.row].tags
+        
+        let flickrImage = fetchedResultsController.object(at: indexPath) as! FlickrImage
+        let flickrImageModel = Parser.parseFlickrImageToModel(flickrImage: flickrImage)
+        cell.imageView.image = flickrImageModel.image
+        let tags = flickrImageModel.tags
         let tagsString = tags.reduce("", { $0 + $1 + ","})
         
         if tags.count > 0 {
